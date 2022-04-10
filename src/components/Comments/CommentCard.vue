@@ -1,7 +1,6 @@
 <template>
-  <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    <li v-for="comment in comments" :key="comment.id" class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
-      <div class="w-full flex items-center justify-between p-6 space-x-6">
+  <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+    <div class="w-full flex items-center justify-between p-6 space-x-6">
         <div class="flex-1">
           <div class="flex items-center space-x-3">
             <h3 class="text-gray-900 text-sm font-medium">{{ comment.name }}</h3>
@@ -18,19 +17,17 @@
           </div>
         </div>
       </div>
-    </li>
-  </ul>
+  </li>
 </template>
 
 <script>
-
 export default {
-  name: 'CommentsView',
+  name: 'CommentCard',
 
   props: {
-    comments: {
-      type: Array,
-      default: () => []
+    comment: {
+      type: Object,
+      default: () => ({})
     }
   }
 }

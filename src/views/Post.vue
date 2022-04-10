@@ -29,7 +29,12 @@
         </dl>
       </div>
       <div class="bg-indigo-200 p-3">
-        <comments v-if="comments.length" :comments="comments" />
+        <div v-if="comments.length" >
+           <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+            Comments:
+          </h3>
+          <comments :comments="comments" />
+        </div>
         <div v-else>This post has no comments yet.</div>
       </div>
     </div>
@@ -41,7 +46,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Comments from './Comments'
+import Comments from '@/components/Comments/Comments'
 
 export default {
   name: 'SinglePostView',

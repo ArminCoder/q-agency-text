@@ -8,12 +8,7 @@
     <div class="mt-8 flex flex-col">
     <div>
       <div class="mt-1">
-        <input
-          v-model="keyword"
-          type="text"
-          class="search-input shadow-sm focus:ring-indigo-700 focus:border-indigo-500 block w-full sm:text-sm rounded-md max-w-xs px-4 py-2 mb-4"
-          placeholder="Search posts by users"
-        />
+        <input-filter placeholder="Search posts by users" @change="filterPosts" />
       </div>
     </div>
       <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -74,21 +69,18 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import { mapGetters } from 'vuex'
-import { debounce } from 'lodash'
+import InputFilter from '@/components/misc/InputFilter'
 
 export default {
   name: 'HomeView',
 
-  mounted () {
-    this.getPosts()
+  components: {
+    InputFilter
   },
 
-  data () {
-    return {
-      keyword: ''
-    }
+  mounted () {
+    this.getPosts()
   },
 
   methods: {
@@ -96,25 +88,13 @@ export default {
       this.$store.dispatch('setPosts')
     },
 
-    filterPosts: debounce(function () {
-      this.$store.dispatch('filterPosts', this.keyword)
-    }, 500)
+    filterPosts (keyword) {
+      this.$store.dispatch('filterPosts', keyword)
+    }
   },
 
   computed: {
     ...mapGetters(['posts'])
-  },
-
-  watch: {
-    keyword () {
-      this.filterPosts()
-    }
   }
 }
 </script>
-
-<style scoped>
-.search-input {
-  border: 1px solid #ccc;
-}
-</style>
